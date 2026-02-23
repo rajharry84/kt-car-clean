@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KT Car Clean</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: #0f172a;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #020617;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 14px;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    nav a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a:hover { color: white; }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 60px;
+      gap: 40px;
+    }
+
+    .hero-text h1 {
+      font-size: 60px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+
+    .hero-img img {
+      width: 340px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      object-fit: cover;
+    }
+
+    section { padding: 80px 20px; text-align: center; }
+
+    h2 { color: #38bdf8; font-size: 38px; margin-bottom: 25px; }
+
+    /* ===== CARDS ===== */
+    .service-grid, .info-grid, .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card, .info-card, .review {
+      background: #020617;
+      padding: 22px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      transition: 0.25s;
+    }
+
+    .card:hover, .review:hover {
+      transform: translateY(-5px);
+    }
+
+    /* ===== BEFORE AFTER SLIDER ===== */
+    .compare-container {
+      max-width: 700px;
+      margin: auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 2px solid #38bdf8;
+    }
+
+    .compare-container img { width: 100%; display: block; }
+
+    .after-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      overflow: hidden;
+    }
+
+    .slider { width: 100%; margin-top: 15px; }
+
+    /* ===== WHATSAPP ===== */
+    .whatsapp {
+      background: linear-gradient(135deg,#16a34a,#15803d);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: white;
+      color: #15803d;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* FLOATING BUTTON */
+    .floating-wa {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 16px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      z-index: 999;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #020617;
+      color: #38bdf8;
+    }
+
+    @media (max-width:768px){
+      .hero-text h1 { font-size: 42px; }
+      .hero-img img { width: 260px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#results">Results</a>
+  <a href="#booking">Book</a>
+  <a href="#info">Info</a>
+</nav>
+
+<header id="home">
+  <div class="hero-text">
+    <h1>K&T CAR CLEAN</h1>
+    <p>Reliable Mobile Car Cleaning Service</p>
+  </div>
+</header>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="service-grid">
+    <div class="card"><h3>Full Valet</h3><p>Complete clean inside and outside your vehicle.</p></div>
+    <div class="card"><h3>Exterior Wash</h3><p>Safe wash with shine finish.</p></div>
+    <div class="card"><h3>Interior Clean</h3><p>Vacuum, wipe down and fresh finish.</p></div>
+    <div class="card"><h3>Wheel Clean</h3><p>Tyres and rims cleaned and dressed.</p></div>
+    <div class="card"><h3>Seat & Carpet Clean</h3><p>Deep cleaning to remove stains and dirt.</p></div>
+    <div class="card"><h3>Dashboard Detail</h3><p>Interior plastics cleaned and protected.</p></div>
+    <div class="card"><h3>Tyre Shine</h3><p>Long‑lasting glossy tyre finish.</p></div>
+  </div>
+</section>
+
+
+
+
+
+<section id="booking">
+  <div class="whatsapp">
+    <h2>Book on WhatsApp</h2>
+    <p>Message us directly to arrange your car wash.</p>
+    <a class="whatsapp-btn" href="https://wa.me/447427353165?text=Hi%20KT%20Car%20Clean%2C%20I%20want%20to%20book%20a%20wash" target="_blank">Message Us</a>
+  </div>
+</section>
+
+<section id="info">
+  <h2>Business Information</h2>
+  <div class="info-grid">
+    <div class="info-card"><h3>Opening Times</h3><p>Mon–Thu: 5PM–8PM<br>Fri: Closed<br>Sat & Sun: 10AM–5PM</p></div>
+    <div class="info-card"><h3>Prices</h3><p>Inside £10–£12<br>Outside £8–£10<br>In & Out £15–£20</p></div>
+    <div class="info-card"><h3>Contact</h3><p>07427 353165</p></div>
+    <div class="info-card"><h3>Payments</h3><p>Bank Transfer<br>Cash</p></div>
+  </div>
+</section>
+
+<footer>© 2026 KT Car Clean</footer>
+
+<a class="floating-wa" href="https://wa.me/447427353165" target="_blank">WhatsApp</a>
+
+<script>
+  const slider = document.getElementById('slider');
+  const afterBox = document.getElementById('afterBox');
+  slider.addEventListener('input', () => {
+    afterBox.style.width = slider.value + '%';
+  });
+</script>
+
+</body>
+</html>
