@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K&T Car Clean</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+html{scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
+
+body{background:#0f172a;color:#e5e7eb;line-height:1.6}
+
+h1,h2,h3{font-weight:700}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:#020617;
+display:flex;
+justify-content:center;
+gap:25px;
+padding:14px;
+z-index:1000;
+border-bottom:1px solid rgba(255,255,255,0.08)
+}
+
+nav a{color:#38bdf8;text-decoration:none;font-weight:600}
+nav a:hover{color:white}
+
+header{
+display:flex;
+flex-direction:column;
+text-align:center;
+padding:130px 20px 70px
+}
+
+.hero-title{
+font-size:56px;
+font-weight:800;
+color:#38bdf8
+}
+
+.hero-sub{
+margin-top:10px;
+font-size:20px
+}
+
+.hero-tag{
+margin-top:8px;
+font-size:16px;
+color:#94a3b8
+}
+
+section{padding:80px 20px;text-align:center}
+
+h2{color:#38bdf8;font-size:36px;margin-bottom:30px}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+max-width:1100px;
+margin:auto
+}
+
+.card{
+background:#020617;
+padding:25px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 6px 18px rgba(0,0,0,0.35);
+transition:0.25s
+}
+
+.card:hover{transform:translateY(-6px)}
+
+.price{
+font-size:28px;
+color:#38bdf8;
+margin:10px 0
+}
+
+
+.review{
+background:#020617;
+padding:22px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.08)
+}
+
+.whatsapp{
+background:linear-gradient(135deg,#16a34a,#15803d);
+padding:40px;
+border-radius:18px;
+max-width:800px;
+margin:auto
+}
+
+.whatsapp-btn{
+display:inline-block;
+margin-top:20px;
+background:white;
+color:#15803d;
+padding:14px 30px;
+border-radius:30px;
+font-weight:700;
+text-decoration:none
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+max-width:900px;
+margin:auto
+}
+
+.info-card{
+background:#020617;
+padding:20px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.08)
+}
+
+.floating-wa{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:16px 18px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 10px 25px rgba(0,0,0,0.6);
+z-index:999
+}
+
+footer{
+text-align:center;
+padding:25px;
+background:#020617;
+color:#38bdf8
+}
+
+@media(max-width:768px){
+.hero-title{font-size:40px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#reviews">Reviews</a>
+<a href="#booking">Book</a>
+</nav>
+
+<header id="home">
+<h1 class="hero-title">K&T CAR CLEAN</h1>
+<p class="hero-sub">Mobile Car Cleaning In Southampton</p>
+<p class="hero-tag">We Come To You – No Queues, No Hassle</p>
+</header>
+
+<section id="about">
+<h2>About Us</h2>
+<p style="max-width:800px;margin:auto">
+We are cousins, Tej and Keerat, and we are both 14 years old. We want to start our own car washing business because we enjoy working together and would like to earn some of our own money. We have noticed that many people in our neighbourhood are busy and don’t always have time to wash their cars, so we thought this would be a good idea. We plan to wash cars using equipment like buckets, sponges, soap, and a hose. We will work on weekends and after school so it doesn’t affect our schoolwork. This business will also help us contribute towards our tuitions and support our education. We believe this will help us learn responsibility, teamwork, and confidence, and we will do our best to keep our customers happy.
+</p>
+</section>
+
+<section id="services">
+<h2>Our Packages</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Exterior Wash</h3>
+<div class="price">£15</div>
+<p>Safe hand wash</p>
+<p>Wheels cleaned</p>
+<p>Tyres dressed</p>
+<p>Dry finish</p>
+</div>
+
+<div class="card">
+<h3>Interior Clean</h3>
+<div class="price">£15</div>
+<p>Full vacuum</p>
+<p>Dashboard wiped</p>
+<p>Windows cleaned</p>
+<p>Interior refreshed</p>
+</div>
+
+<div class="card">
+<h3>Full Valet</h3>
+<div class="price">£25</div>
+<p>Interior clean</p>
+<p>Exterior wash</p>
+<p>Wheels detailed</p>
+<p>Full car refresh</p>
+</div>
+
+</div>
+</section>
+
+
+<section id="reviews">
+<h2>Customer Reviews</h2>
+
+<div class="grid">
+
+<div class="review">
+<p>⭐⭐⭐⭐⭐</p>
+<p>Great job cleaning my car. Very polite and hardworking.</p>
+<p><strong>– Sarah, Southampton</strong></p>
+</div>
+
+<div class="review">
+<p>⭐⭐⭐⭐⭐</p>
+<p>My car looked brand new again. Highly recommend.</p>
+<p><strong>– Tom, Southampton</strong></p>
+</div>
+
+<div class="review">
+<p>⭐⭐⭐⭐⭐</p>
+<p>Super convenient service because they come to your house.</p>
+<p><strong>– James, Southampton</strong></p>
+</div>
+
+</div>
+
+</section>
+
+<section id="booking">
+<div class="whatsapp">
+<h2>Book Your Car Clean</h2>
+<p>Message us on WhatsApp to book a slot.</p>
+<p>Limited weekend availability.</p>
+<a class="whatsapp-btn" href="https://wa.me/447427353165?text=Hi%20KT%20Car%20Clean%2C%20I%20want%20to%20book%20a%20wash" target="_blank">Message Us</a>
+</div>
+</section>
+
+<section>
+<h2>Business Information</h2>
+
+<div class="info-grid">
+
+<div class="info-card">
+<h3>Opening Times</h3>
+<p>Mon–Thu: 5PM–8PM</p>
+<p>Sat & Sun: 10AM–5PM</p>
+</div>
+
+<div class="info-card">
+<h3>Location</h3>
+<p>Southampton</p>
+<p>Mobile service</p>
+</div>
+
+<div class="info-card">
+<h3>Contact</h3>
+<p>07427 353165</p>
+</div>
+
+<div class="info-card">
+<h3>Payments</h3>
+<p>Cash</p>
+<p>Bank Transfer</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 KT Car Clean
+</footer>
+
+<a class="floating-wa" href="https://wa.me/447427353165" target="_blank">WhatsApp</a>
+
+</body>
+</html>
