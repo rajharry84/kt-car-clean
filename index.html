@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K&T Car Clean</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111214;
+    --card: #161820;
+    --gold: #c8973a;
+    --gold-light: #e8b84b;
+    --blue: #a8c4d8;
+    --white: #f0ece4;
+    --muted: #7a7a85;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 3rem;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(200,151,58,0.2);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.7rem; letter-spacing: 0.12em;
+    color: var(--gold); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--white); text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.75; transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-links .nav-cta a {
+    background: var(--gold); color: #000; opacity: 1;
+    padding: 0.45rem 1.2rem; font-weight: 600;
+    transition: background 0.2s;
+  }
+  .nav-links .nav-cta a:hover { background: var(--gold-light); }
+
+  /* Hamburger */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--white); transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none; position: fixed; top: 62px; left: 0; right: 0; z-index: 190;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(200,151,58,0.2);
+    padding: 1.5rem 2rem 2rem;
+    flex-direction: column; gap: 0;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--white); text-decoration: none;
+    font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    opacity: 0.8; transition: opacity 0.2s, color 0.2s;
+  }
+  .mobile-menu a:hover { opacity: 1; color: var(--gold); }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 7rem 3rem 4rem; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 75% 50%, rgba(168,196,216,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,151,58,0.06) 0%, transparent 70%),
+      linear-gradient(160deg, #0a0a0a 45%, #13161c 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: linear-gradient(rgba(200,151,58,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(200,151,58,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(200,151,58,0.4);
+    padding: 0.35rem 1rem; margin-bottom: 2rem;
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4.5rem, 12vw, 9rem);
+    line-height: 0.92; letter-spacing: 0.03em;
+    animation: fadeUp 0.7s 0.15s ease both;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-tagline {
+    margin-top: 1.8rem;
+    font-size: 1.05rem; font-style: italic; letter-spacing: 0.04em;
+    color: var(--blue); opacity: 0.9;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .hero-cta {
+    margin-top: 2.8rem; display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.45s ease both;
+  }
+  .btn {
+    display: inline-block; text-decoration: none;
+    padding: 0.9rem 2.2rem;
+    font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    font-family: 'Barlow', sans-serif; font-weight: 600;
+    cursor: pointer; border: none; transition: all 0.25s;
+  }
+  .btn-primary { background: var(--gold); color: #000; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,151,58,0.35); }
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(240,236,228,0.35); }
+  .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 3rem; }
+  .section-label { font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1; letter-spacing: 0.04em; }
+  .divider { width: 48px; height: 2px; background: var(--gold); margin: 1.4rem 0 2.5rem; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--dark); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5px; margin-top: 3rem;
+    border: 1.5px solid rgba(200,151,58,0.15);
+  }
+  .service-card {
+    background: var(--card); padding: 2.5rem 2rem;
+    position: relative; overflow: hidden; transition: background 0.3s;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0;
+    background: var(--gold); transition: height 0.4s ease;
+  }
+  .service-card:hover::before { height: 100%; }
+  .service-card:hover { background: #1c1f27; }
+  .service-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+  .service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── PRICES ── */
+  #prices { background: linear-gradient(135deg, #0a0a0a 0%, #13161c 100%); }
+  .prices-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2rem; }
+  .price-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .price-card {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--card); border: 1px solid rgba(200,151,58,0.1);
+    padding: 1.4rem 2rem;
+    transition: border-color 0.3s, transform 0.3s; cursor: default;
+  }
+  .price-card:hover { border-color: var(--gold); transform: translateX(6px); }
+  .price-card .label { font-size: 1rem; font-weight: 600; letter-spacing: 0.05em; }
+  .price-card .price { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--gold); letter-spacing: 0.06em; }
+  .price-note { margin-top: 1rem; font-size: 0.8rem; color: var(--muted); font-style: italic; letter-spacing: 0.05em; }
+  .hours-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.1em; margin-bottom: 1.5rem; color: var(--gold); }
+  .hours-row { display: flex; justify-content: space-between; padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.92rem; }
+  .hours-row .day { color: var(--muted); letter-spacing: 0.06em; }
+  .hours-row .time { font-weight: 600; }
+  .hours-row.closed .time { color: #c0392b; }
+  .payment-block { margin-top: 2.5rem; }
+  .payment-block h4 { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.9rem; }
+  .payment-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .payment-tag { border: 1px solid rgba(200,151,58,0.35); padding: 0.35rem 1rem; font-size: 0.8rem; letter-spacing: 0.12em; color: var(--white); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--black); }
+  .about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 5rem; align-items: center; margin-top: 2rem; }
+  .about-icons { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+  .about-icon-card { text-align: center; }
+  .about-icon {
+    font-size: 4rem; background: var(--card); border: 1px solid rgba(200,151,58,0.2);
+    width: 100px; height: 100px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 0.8rem;
+  }
+  .about-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.15em; color: var(--gold); }
+  .about-ampersand { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--muted); }
+  .about-text { display: flex; flex-direction: column; gap: 1.2rem; }
+  .about-text p { font-size: 1rem; line-height: 1.8; color: rgba(240,236,228,0.8); }
+  .about-highlight { color: var(--gold); font-weight: 600; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--dark); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+  .contact-left .big-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    letter-spacing: 0.1em; color: var(--gold);
+    display: block; text-decoration: none; transition: color 0.2s;
+    margin: 1.2rem 0 0.5rem;
+  }
+  .contact-left .big-number:hover { color: var(--gold-light); }
+  .contact-sub { color: var(--muted); font-size: 0.9rem; letter-spacing: 0.06em; line-height: 1.7; margin-bottom: 1.5rem; }
+  .contact-detail { display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.6rem; }
+  .contact-detail .icon { color: var(--gold); font-size: 1.1rem; }
+
+  /* Message Form */
+  .message-form { display: flex; flex-direction: column; gap: 1rem; }
+  .message-form h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--card); border: 1px solid rgba(200,151,58,0.15);
+    color: var(--white); padding: 0.85rem 1rem;
+    font-family: 'Barlow', sans-serif; font-size: 0.92rem;
+    outline: none; transition: border-color 0.25s; resize: none; width: 100%;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--muted); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--card); }
+  .form-success {
+    display: none; background: rgba(200,151,58,0.1);
+    border: 1px solid rgba(200,151,58,0.4);
+    padding: 1.2rem 1.5rem;
+    font-size: 0.9rem; letter-spacing: 0.05em; color: var(--gold); text-align: center;
+  }
+  .form-success.show { display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505; border-top: 1px solid rgba(200,151,58,0.12);
+    padding: 2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; color: var(--muted); letter-spacing: 0.1em;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer span { color: var(--gold); }
+
+  /* ── LIGHT MODE ── */
+  body.light { --black: #f4f1eb; --dark: #e8e4dc; --card: #ffffff; --white: #1a1a1a; --muted: #666670; }
+  body.light nav { background: rgba(244,241,235,0.95); }
+  body.light .mobile-menu { background: rgba(244,241,235,0.98); }
+  body.light .hero-bg { background: radial-gradient(ellipse 70% 60% at 75% 50%, rgba(168,196,216,0.12) 0%, transparent 70%), linear-gradient(160deg, #f4f1eb 45%, #e8e4dc 100%); }
+  body.light .hero-tagline { color: #5a7a8a; }
+  body.light #prices { background: linear-gradient(135deg, #f4f1eb 0%, #e8e4dc 100%); }
+  body.light .hours-row { border-bottom-color: rgba(0,0,0,0.08); }
+  body.light .btn-outline { color: var(--white); border-color: rgba(26,26,26,0.35); }
+  body.light .mobile-menu a { border-bottom-color: rgba(0,0,0,0.07); color: #1a1a1a; }
+  body.light footer { background: #e0dcd4; }
+  body.light .form-group input, body.light .form-group select, body.light .form-group textarea { color: #1a1a1a; }
+  body.light .form-group select option { background: #fff; color: #1a1a1a; }
+  body.light .about-text p { color: rgba(26,26,26,0.8); }
+  body.light .service-card:hover { background: #f9f7f3; }
+  .theme-toggle { background: none; border: 1px solid rgba(200,151,58,0.35); color: var(--white); cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.25s; flex-shrink: 0; }
+  .theme-toggle:hover { border-color: var(--gold); background: rgba(200,151,58,0.1); }
+  .nav-right { display: flex; align-items: center; gap: 0.8rem; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .prices-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">K&amp;T Car Clean</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#prices">Prices</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#contact">Contact Us</a></li>
+    <li class="nav-cta"><a href="#contact-form">Message Us</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">🌙</button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#prices" onclick="closeMenu()">Prices</a>
+  <a href="#hours" onclick="closeMenu()">Hours</a>
+  <a href="#about" onclick="closeMenu()">About Us</a>
+  <a href="#contact" onclick="closeMenu()">Contact Us</a>
+  <a href="#contact-form" onclick="closeMenu()" style="color:var(--gold);">✉ Message Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Professional Car Cleaning</div>
+    <h1>K&amp;T<br><span>Car</span><br>Clean</h1>
+    <p class="hero-tagline">"Where Your Car Becomes Pristine"</p>
+    <div class="hero-cta">
+      <a href="tel:07427353165" class="btn btn-primary">Call to Book</a>
+      <a href="#contact-form" class="btn btn-outline">Message Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What We Offer</div>
+  <h2 class="section-title">Our Services</h2>
+  <div class="divider"></div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🚿</div>
+      <h3>Exterior Handwash</h3>
+      <p>A careful, hand-crafted exterior wash that protects your paintwork and leaves a flawless finish.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💦</div>
+      <h3>Jet Wash + Foam</h3>
+      <p>High-pressure jet wash combined with thick snow foam to blast away dirt and grime with ease.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌀</div>
+      <h3>Interior Vacuum</h3>
+      <p>Deep vacuuming of every corner of your interior, leaving it fresh and spotless throughout.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✨</div>
+      <h3>Wipe &amp; Polish</h3>
+      <p>A detailed wipe-down and polish of all surfaces to restore that showroom shine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICES + HOURS -->
+<section id="prices">
+  <div class="section-label">Transparent Pricing</div>
+  <h2 class="section-title">Prices &amp; Hours</h2>
+  <div class="divider"></div>
+  <div class="prices-wrapper">
+    <div>
+      <div class="price-cards">
+        <div class="price-card"><span class="label">Inside Only</span><span class="price">£15</span></div>
+        <div class="price-card"><span class="label">Outside Only</span><span class="price">£10</span></div>
+        <div class="price-card"><span class="label">In &amp; Out</span><span class="price">£20</span></div>
+      </div>
+      <p class="price-note">* Prices vary depending on the size of your vehicle.</p>
+      <div class="payment-block">
+        <h4>Payment Options</h4>
+        <div class="payment-tags">
+          <div class="payment-tag">Bank Transfer</div>
+          <div class="payment-tag">Cash</div>
+        </div>
+      </div>
+    </div>
+    <div class="hours-block" id="hours">
+      <h3>Opening Times</h3>
+      <div class="hours-row"><span class="day">Monday – Thursday</span><span class="time">5:00 PM – 8:00 PM</span></div>
+      <div class="hours-row closed"><span class="day">Friday</span><span class="time">Closed</span></div>
+      <div class="hours-row"><span class="day">Saturday &amp; Sunday</span><span class="time">10:00 AM – 5:00 PM</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT US -->
+<section id="about">
+  <div class="section-label">Who We Are</div>
+  <h2 class="section-title">About Us</h2>
+  <div class="divider"></div>
+  <div class="about-grid" style="grid-template-columns: 1fr;">
+    <div class="about-text">
+      <p>We are cousins, Tej and Keerat, and we are both 14 years old. We want to start our own car washing business because we enjoy working together and would like to earn some of our own money.</p>
+      <p>We have noticed that many people in our neighbourhood are busy and don't always have time to wash their cars, so we thought this would be a great opportunity to help out. We plan to wash cars using equipment like buckets, sponges, soap, and a hose.</p>
+      <p>We will work on weekends and after school so it doesn't affect our schoolwork. This business will also help us contribute towards our tuitions and support our education.</p>
+      <p>We believe this will help us learn <span class="about-highlight">responsibility</span>, <span class="about-highlight">teamwork</span>, and <span class="about-highlight">confidence</span> — and we will do our best to keep our customers happy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Contact Us</h2>
+  <div class="divider"></div>
+
+  <div class="contact-grid">
+    <!-- Call info -->
+    <div class="contact-left">
+      <p class="contact-sub">Ready to book or have a question? Call us directly or send a message and we'll get back to you as soon as possible.</p>
+      <div class="contact-detail"><span class="icon">📞</span><span>Call or Text Us</span></div>
+      <a href="tel:07427353165" class="big-number">07427 353165</a>
+      <a href="tel:07427353165" class="btn btn-primary" style="margin-top:1rem; display:inline-block;">Call Now</a>
+      <div style="margin-top:2.5rem;">
+        <div class="contact-detail"><span class="icon">💳</span><span>Bank Transfer &amp; Cash accepted</span></div>
+        <div class="contact-detail"><span class="icon">🕐</span><span>Mon–Thu: 5PM–8PM &nbsp;|&nbsp; Sat &amp; Sun: 10AM–5PM</span></div>
+        <div class="contact-detail"><span class="icon">❌</span><span>Closed Fridays</span></div>
+      </div>
+    </div>
+
+    <!-- Message form -->
+    <div id="contact-form">
+      <div class="message-form">
+        <h3>Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="fname" placeholder="John Smith">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="fphone" placeholder="07700 000000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Service Interested In</label>
+          <select id="fservice">
+            <option value="">Select a service…</option>
+            <option>Inside</option>
+            <option>Outside</option>
+            <option>In &amp; Out</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Message</label>
+          <textarea id="fmessage" rows="5" placeholder="Tell us about your car, preferred date/time, or any questions…"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="sendMessage()" style="width:100%;text-align:center;">Send Message</button>
+        <div class="form-success" id="formSuccess">✅ &nbsp;Message sent! We'll be in touch soon.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 <span>K&amp;T Car Clean</span>. All rights reserved.</div>
+  <div>"Where Your Car Becomes Pristine"</div>
+</footer>
+
+<script>
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light');
+    themeToggle.textContent = '☀️';
+  }
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    const isLight = document.body.classList.contains('light');
+    themeToggle.textContent = isLight ? '☀️' : '🌙';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  window.addEventListener('scroll', closeMenu);
+
+  function sendMessage() {
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const message = document.getElementById('fmessage').value.trim();
+
+    if (!name || !phone || !message) {
+      alert('Please fill in your name, phone number, and message before sending.');
+      return;
+    }
+
+    const service = document.getElementById('fservice').value || 'Not specified';
+    const text = `Hi K&T Car Clean! My name is ${name}. My number is ${phone}. Interested in: ${service}. Message: ${message}`;
+    const encoded = encodeURIComponent(text);
+    window.open(`sms:07427353165?body=${encoded}`, '_blank');
+
+    document.getElementById('formSuccess').classList.add('show');
+    document.getElementById('fname').value = '';
+    document.getElementById('fphone').value = '';
+    document.getElementById('fservice').value = '';
+    document.getElementById('fmessage').value = '';
+  }
+</script>
+</body>
+</html>
